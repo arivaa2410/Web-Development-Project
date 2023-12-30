@@ -48,8 +48,14 @@ $allnews = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     </div>
 
-    </div>
+    </div><br><br><br>
+    <footer>
 
+
+        <center>
+            <h3>© 2023 Railway Transportation News Announcement System. All rights reserved.</h3>
+            <center>
+    </footer>
 </body>
 
 </html>

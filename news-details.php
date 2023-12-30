@@ -46,7 +46,15 @@ $news = mysqli_fetch_assoc($result);
             <p class="news-card__date"><?= $date ?></p>
             <p class="news-card__description"><?= $news['Description'] ?></p>
         </div>
-    </div>
+    </div><br><br><br>
+
+    <footer>
+
+        <center>
+            <h3>© 2023 Railway Transportation News Announcement System. All rights reserved.</h3>
+            <center>
+
+    </footer>
 </body>
 
 </html>
