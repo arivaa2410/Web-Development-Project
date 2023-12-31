@@ -7,7 +7,6 @@
         <!-- CSS Style -->
         <link rel="stylesheet" href="./assets/css/style1.css"/>
     </head>
-    
         <body>
         
                 <div class="topleft4"><b> Railway Transportation News Announcement System </b></div>
@@ -22,11 +21,11 @@
           </header>
         <center>
           <section class="registration-section">
-            <img src="impact.png" height ="250px" width="250px">
+            <img src="assets/img/impact.png" height ="250px" width="250px">
             <h2><b>REGISTER YOUR ACCOUNT HERE</b></h2>
             <p>If you already have an account with us, Please <a href="login.php">Log In</a>.</p>
         
-            <form id="registration-form" method="post" action="registration.php">
+            <form id="registration-form" method="post" action="register.php">
             <div class="form-row">
                 <label for="first-name" class="required"><b>First Name:</b></label>
                 <input type="text" id="first-name" name="first-name" required>
@@ -91,28 +90,34 @@
                 </select>
               </div>
               
-              
-
-              <div class="g-recaptcha" data-sitekey="6LfqMjcpAAAAAJRrpUFoL_1xVJoBEvJY44RuP756"></div>
+              <div class="g-recaptcha" data-sitekey="6LeO7EApAAAAAAoz8ji4rOMfGYBLZ6S7COgWeOEx"></div>
               <input type="submit" class="button" value="Register"><br><br>
             </form>
           </section>
           </center>
 
           <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-         
-
           <script src="script.js"></script>
+
           <script>
            document.getElementById("registration-form").addEventListener("submit", function(event) {
+            event.preventDefault();
             var password = document.getElementById("pass-id").value;
+            var recaptchaResponse = grecaptcha.getResponse();
+
             if (password.length < 8) {
                 alert("Password is too short. It must be at least 8 characters long.");
-                event.preventDefault();
-               }
+                return;
+            }
+
+            if (!recaptchaResponse) {
+              alert("Please complete the reCAPTCHA.");
+              return;
+            }
+
+            this.submit();
+                
            });
           </script>
-
         </body>
-    
 </html>
