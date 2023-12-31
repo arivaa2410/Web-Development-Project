@@ -1,8 +1,8 @@
 <?php
 // Database configuration
-$host = "your_database_host";
-$username = "your_database_username";
-$password = "your_database_password";
+$host = "localhost";
+$username = "root";
+$password = "";
 $database = "user_profiles";
 
 // Connect to the database
