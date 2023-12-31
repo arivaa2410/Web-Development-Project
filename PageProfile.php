@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +19,7 @@ body  {
 <body>
     <div class="container light-style flex-grow-1 container-p-y">
         <h4 class="font-weight-bold py-3 mb-4">
-            Profile page
+            Account settings
         </h4>
         <div class="card overflow-hidden">
             <div class="row no-gutters row-bordered row-border-light">
@@ -90,16 +89,18 @@ body  {
                                 
                                 <div class="form-group">
                                     <label class="form-label">Birthday</label>
-                                    <input type="text" class="form-control" value="May 3, 1995">
+                                    <input type="text" class="form-control" value="">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Country</label>
                                     <select class="custom-select">
-                                        <option>USA</option>
-                                        <option selected>Canada</option>
-                                        <option>UK</option>
-                                        <option>Germany</option>
-                                        <option>France</option>
+                                        <option>IPOH</option>
+                                        <option>JOHOR BAHRU</option>
+                                        <option>KOTA KINABALU</option>
+                                        <option>KUALA LUMPUR</option>
+                                        <option>PENANG</option>
+                                        <option>PUTATAN</option>
+                                        <option>RAYOH</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,7 +109,7 @@ body  {
                                 <h6 class="mb-4">Contacts</h6>
                                 <div class="form-group">
                                     <label class="form-label">Phone</label>
-                                    <input type="text" class="form-control" value="+0 (123) 456 7891">
+                                    <input type="text" class="form-control" value="">
                                 </div>
                             </div>
                         </div>
