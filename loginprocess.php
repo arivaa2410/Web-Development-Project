@@ -1,24 +1,52 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    // Assuming GET method is used; you can change this according to your form method
-
     // Retrieve form data
     $username = $_GET['Uname'];
     $password = $_GET['Pass'];
 
-    // Perform authentication (replace this with your authentication logic)
-    // For demonstration purposes, using hardcoded username and password
-    $valid_username = "your_username"; // Replace with your valid username
-    $valid_password = "your_password"; // Replace with your valid password
+    // Database connection settings
+    $servername = "localhost";
+    $db_username = "root";
+    $db_password = "";
+    $dbname = "webdev";
 
-    if ($username === $valid_username && $password === $valid_password) {
-        // Successful login
-        echo "<h2>Login Successful!</h2>";
-        // Redirect to the home page or another page after successful login
-        // header("Location: HomePage.html");
-    } else {
-        // Invalid credentials
-        echo "<h2>Invalid Username or Password!</h2>";
+    try {
+        // Create connection using PDO
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db_username, $db_password);
+        // Set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Prepare a SQL statement to retrieve user credentials
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->bindParam(':user_name', $username);
+        $stmt->execute();
+
+        // Check if a user with the provided username exists
+        if ($stmt->rowCount() > 0) {
+            // Fetch user details
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $hashed_password = $user['password'];
+
+            // Verify the password
+            if (password_verify($password, $hashed_password)) {
+                // Successful login
+                // Redirect to the homepage
+                header("Location: homepage.php");
+                exit;
+            } else {
+                // Invalid password
+                echo "<h2>Invalid Password!</h2>";
+            }
+        } else {
+            // User does not exist
+            echo "<h2>Invalid Username!</h2>";
+        }
+    } catch (PDOException $e) {
+        // Handle database connection errors
+        echo "Connection failed: " . $e->getMessage();
     }
+
+    // Close the database connection
+    $conn = null;
 }
 ?>
