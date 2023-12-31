@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch news data from the database
-$sql = "SELECT news_id, Title, Time, Description FROM news"; // Replace 'news_table' with your actual table name
+$sql = "SELECT news_id, Title, Time, Description FROM news";
 $result = $conn->query($sql);
 
 // Close the database connection
@@ -186,7 +186,7 @@ $conn->close();
                         <td>{$row['Time']}</td>
                         <td>{$row['Description']}</td>
                         <td>
-                            <button class='delete-btn'>Delete</button>
+                           <button class='delete-btn' data-news-id='{$row['news_id']}'>Delete</button>
                         </td>
                       </tr>";
             }
@@ -199,37 +199,46 @@ $conn->close();
     </div>
 
     <script>
-    // JavaScript code to handle the delete button click
-    document.addEventListener('DOMContentLoaded', function () {
-        // Get all delete buttons by their class name
-        var deleteButtons = document.getElementsByClassName('delete-btn');
+        // JavaScript code to handle the delete button click
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all delete buttons by their class name
+            var deleteButtons = document.getElementsByClassName('delete-btn');
 
-        // Attach a click event listener to each delete button
-        Array.from(deleteButtons).forEach(function (button) {
-            button.addEventListener('click', function () {
-                // Get the news ID from the data attribute
-                var newsId = this.getAttribute('data-news-id');
+            // Attach a click event listener to each delete button
+            Array.from(deleteButtons).forEach(function (button) {
+                button.addEventListener('click', function () {
+                    // Get the news ID from the data attribute
+                    var newsId = this.getAttribute('data-news-id');
 
-                // Confirm the deletion
-                if (confirm('Are you sure you want to delete this news?')) {
-                    // Perform the deletion using AJAX or form submission
-                    // You need to implement the deletion logic on the server side (PHP)
-                    // and make an AJAX request to delete the news record
-                    // Example: You can use fetch() or XMLHttpRequest to send a request to the server
-                    // with the news ID for deletion.
-
-                    // After successful deletion, you may want to update the table or reload the page.
-                    // For simplicity, let's reload the page in this example.
-                    window.location.reload();
-                }
+                    // Confirm the deletion
+                    if (confirm('Are you sure you want to delete this news?')) {
+                        // Perform the deletion using AJAX
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                if (xhr.status === 200) {
+                                    // Reload the page after successful deletion
+                                    window.location.reload();
+                                } else {
+                                    // Handle error
+                                    console.error('Error deleting news');
+                                }
+                            }
+                        };
+                        
+                        // Send the AJAX request to the PHP script for deletion
+                        xhr.open('POST', 'delete_news.php', true);
+                        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                        xhr.send('news_id=' + encodeURIComponent(newsId));
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 
-<!--Footer -->
-<?php include('footer.php'); ?>
-<!-- /Footer--> 
-
+    <!--Footer -->
+    <?php include('footer.php'); ?>
+    <!-- /Footer--> 
 </body>
 </html>
+
