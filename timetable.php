@@ -132,7 +132,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "trainschedulev2"; // Change to your actual database name
+        $dbname = "webdev"; // Change to your actual database name
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
