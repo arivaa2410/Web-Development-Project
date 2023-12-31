@@ -15,7 +15,7 @@
 
         header {
             background-color: #598fb7;
-            color: black    ;
+            color: black;
             text-align: center;
             padding: 1em;
             display: flex;
@@ -88,6 +88,19 @@
             background-color: #f2f2f2;
         }
 
+        section {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
         footer {
             background-color: #1f5588;
             color: #fff;
@@ -101,7 +114,7 @@
 </head>
 <body>
     <header>
-        <img src="trainlogov2.png">
+        <img src="trainlogov2.png" alt="Train Logo">
         <h1>Railway Transportation News Announcement System</h1>
         <h2>Embark On a Journey, Let the Rail Unfolds</h2>
     </header>
@@ -119,7 +132,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "trainschedule";
+        $dbname = "trainschedulev2"; // Change to your actual database name
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -147,6 +160,7 @@
 
         <!-- Render the table -->
         <table>
+            <h2>Timetable Train</h2>
             <thead>
                 <tr>
                     <th>Schedule ID</th>
@@ -173,6 +187,71 @@
             </tbody>
         </table>
         <!-- End of the table rendering -->
+
+       <!-- Display List of Trains -->
+<section>
+    <h2>List of Trains</h2>
+    <?php
+    // Fetch available trains from the database
+    $sqlTrains = "SELECT * FROM trains";
+    $resultTrains = $conn->query($sqlTrains);
+    ?>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Train ID</th>
+                <th>Train Name</th>
+                <th>Train Type</th>
+                <th>Capacity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($rowTrain = $resultTrains->fetch_assoc()) : ?>
+                <tr>
+                    <td><?= $rowTrain['TrainID'] ?></td>
+                    <td><?= $rowTrain['TrainName'] ?></td>
+                    <td><?= $rowTrain['TrainType'] ?></td>
+                    <td><?= $rowTrain['Capacity'] ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</section>
+
+<!-- Display List of Stations -->
+<section>
+    <h2>List of Stations</h2>
+    <?php
+    // Fetch available stations from the database
+    $sqlStations = "SELECT * FROM stations";
+    $resultStations = $conn->query($sqlStations);
+    ?>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Station ID</th>
+                <th>Station Name</th>
+                <th>Location</th>
+                <th>Arrival Station ID</th>
+                <th>Facilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($rowStation = $resultStations->fetch_assoc()) : ?>
+                <tr>
+                    <td><?= $rowStation['StationID'] ?></td>
+                    <td><?= $rowStation['StationName'] ?></td>
+                    <td><?= $rowStation['Location'] ?></td>
+                    <td><?= $rowStation['ArrivalStationID'] ?></td>
+                    <td><?= $rowStation['Facilities'] == 1 ? 'Available' : 'Not Available' ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</section>
+
 
         <?php
         $conn->close();
