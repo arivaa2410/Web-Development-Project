@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Verify reCAPTCHA first
-    $recaptcha_secret = "6LeO7EApAAAAAAoz8ji4rOMfGYBLZ6S7COgWeOEx";
+    $recaptcha_secret = "6LfqMjcpAAAAAJRrpUFoL_1xVJoBEvJY44RuP756";
     $recaptcha_response = $_POST['g-recaptcha-response'];
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $data = [

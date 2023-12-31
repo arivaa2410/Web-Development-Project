@@ -90,34 +90,41 @@
                 </select>
               </div>
               
-              <div class="g-recaptcha" data-sitekey="6LeO7EApAAAAAAoz8ji4rOMfGYBLZ6S7COgWeOEx"></div>
+              <div class="g-recaptcha" data-sitekey="6LfqMjcpAAAAAJRrpUFoL_1xVJoBEvJY44RuP756"></div>
               <input type="submit" class="button" value="Register"><br><br>
             </form>
           </section>
           </center>
 
           <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+          
           <script src="script.js"></script>
 
           <script>
-           document.getElementById("registration-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            var password = document.getElementById("pass-id").value;
-            var recaptchaResponse = grecaptcha.getResponse();
+             document.getElementById("registration-form").addEventListener("submit", function(event) {
+             event.preventDefault();
+             var password = document.getElementById("pass-id").value;
 
-            if (password.length < 8) {
-                alert("Password is too short. It must be at least 8 characters long.");
+             if (typeof grecaptcha === 'undefined') {
+                 alert("reCAPTCHA not loaded. Please check your internet connection.");
+                 return;
+             }
+
+             var recaptchaResponse = grecaptcha.getResponse();
+
+             if (password.length < 8) {
+                 alert("Password is too short. It must be at least 8 characters long.");
+                 return;
+             }
+
+             if (!recaptchaResponse) {
+                 alert("Please complete the reCAPTCHA.");
                 return;
-            }
+             }
 
-            if (!recaptchaResponse) {
-              alert("Please complete the reCAPTCHA.");
-              return;
-            }
-
-            this.submit();
-                
-           });
+            this.submit();            
+            });
           </script>
+
         </body>
 </html>

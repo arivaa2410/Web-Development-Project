@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./assets/css/style1.css"/>
     </head>
     <body>
-    
+      
             <div class="topleft4"><b> Railway Transportation News Announcement System </b></div>
             
             <div class="topleft5"> Embark On a Journey, Let the Rail Unfolds </div>
@@ -44,7 +44,7 @@
                 <input type="checkbox" id="check">
                 <span>Remember me</span>
                 <br><br>
-                <a href="OTPfunc.php">Forgot Password</a>
+                <a href="forgotpassword.php">Forgot Password</a>
             </form>
 
              <!-- Error Message Display -->
