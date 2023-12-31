@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
 
     // Perform database operations (Update users table)
-    $sql = "UPDATE users SET username='$username', name='$name', email='$email', birthday='$birthday', country='$country', phone='$phone', website='$website', twitter='$twitter', facebook='$facebook', googlePlus='$googlePlus', linkedIn='$linkedIn', instagram='$instagram' WHERE id=1"; // Assuming the user ID is 1 for simplicity.
+    $sql = "UPDATE users SET username='$username', name='$name', email='$email', birthday='$birthday', country='$country', phone='$phone'; // Assuming the user ID is 1 for simplicity.
 
     if ($conn->query($sql) === TRUE) {
         echo "Profile updated successfully";
