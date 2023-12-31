@@ -1,8 +1,8 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $username = $_GET['Uname'];
-    $password = $_GET['Pass'];
+    $username = $_POST['Uname'];
+    $password = $_POST['Pass'];
 
     // Database connection settings
     $servername = "localhost";
@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare a SQL statement to retrieve user credentials
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
-        $stmt->bindParam(':user_name', $username);
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_name = :username");
+        $stmt->bindParam(':username', $username);
         $stmt->execute();
 
         // Check if a user with the provided username exists
@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             // Fetch user details
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             $hashed_password = $user['password'];
+            
 
             // Verify the password
             if (password_verify($password, $hashed_password)) {
@@ -35,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 exit;
             } else {
                 // Invalid password
-                echo "<h2>Invalid Password!</h2>";
+                echo "<center><h2>Invalid Password!</h2></center>";
             }
         } else {
             // User does not exist
-            echo "<h2>Invalid Username!</h2>";
+            echo "<center><h2>Invalid Username!</h2></center>";
         }
     } catch (PDOException $e) {
         // Handle database connection errors
