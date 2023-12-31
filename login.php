@@ -46,6 +46,9 @@
                 <br><br>
                 <a href="OTPfunc.php">Forgot Password</a>
             </form>
+
+             <!-- Error Message Display -->
+             <div id="login-error" style="color:red;"></div>
         </div></center><br><br><br><br><br><br><br>
         </body>
 </html>
