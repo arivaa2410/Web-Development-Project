@@ -37,14 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Contacts tab
     $phone = sanitizeInput($_POST["phone"]);
-    $website = sanitizeInput($_POST["website"]);
+   
 
-    // Social links tab
-    $twitter = sanitizeInput($_POST["twitter"]);
-    $facebook = sanitizeInput($_POST["facebook"]);
-    $googlePlus = sanitizeInput($_POST["googlePlus"]);
-    $linkedIn = sanitizeInput($_POST["linkedIn"]);
-    $instagram = sanitizeInput($_POST["instagram"]);
+   
 
     // Perform database operations (Update users table)
     $sql = "UPDATE users SET username='$username', name='$name', email='$email', birthday='$birthday', country='$country', phone='$phone', website='$website', twitter='$twitter', facebook='$facebook', googlePlus='$googlePlus', linkedIn='$linkedIn', instagram='$instagram' WHERE id=1"; // Assuming the user ID is 1 for simplicity.
