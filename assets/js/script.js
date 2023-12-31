@@ -1,23 +1,42 @@
+async function submitRegistrationForm(event) {
+  event.preventDefault();
 
+  if (isFormIncomplete()) {
+    alert('Please fill up all the required fields.');
+    return;
+  }
 
-window.onload = function() {
-              
-  document.getElementById('registration-form').addEventListener('submit', function(event) {
-    event.preventDefault(); 
+  const form = document.getElementById('registration-form');
+  const formData = new FormData(form);
 
-    if (isFormIncomplete()) {
-      alert('Please fill up all the required fields.'); 
-    } else {
-      
-      var registrationSuccessful = true; 
+  // Add reCAPTCHA response token to the form data
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (recaptchaResponse.length === 0) {
+    alert("Please complete the reCAPTCHA.");
+    return;
+  }
+  formData.append('g-recaptcha-response', recaptchaResponse);
 
-      if (registrationSuccessful) {
-        alert('Registration successful!'); 
-      } else {
-        alert('Registration unsuccessful. Please try again later.');
-      }
+  try {
+    const response = await fetch('register.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  });
+
+    const result = await response.json();
+
+    if (result.success) {
+      window.location.href = 'login.php';
+    } else {
+      alert('Registration unsuccessful. Please try again later.');
+    }
+  } catch (error) {
+    console.error('Error during form submission:', error);
+  }
 }
 
 function isFormIncomplete() {
@@ -33,48 +52,46 @@ function isFormIncomplete() {
   return incomplete;
 }
 
+// Add the event listener to the form
+document.getElementById('registration-form').addEventListener('submit', submitRegistrationForm);
 
 
+//login script
+document.getElementById("login").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent the default form submission
 
+  var username = document.getElementById("Uname").value.trim();
+  var password = document.getElementById("Pass").value.trim();
 
+  // Basic Form Validation
+  if (username === "" || password === "") {
+      alert("Please enter both username and password.");
+      return; // Stop the function if validation fails
+  }
 
-window.onload = function() {
-// Your existing JavaScript code
-// ...
-}
+  // AJAX request to send form data to the PHP script
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+              // Handle successful response from the PHP script
+              // Display the response from PHP (e.g., login success/error message)
+              var response = xhr.responseText.trim();
+              if (response === "Success"){
+                window.location.href = 'homepage.php';
+              }else {
+                document.getElementById("login-error").innerHTML = response; 
+              }
+              
+          } else {
+              // Handle any errors
+              console.log('There was a problem with the request.');
+          }
+      }
+  };
 
-function isFormIncomplete() {
-// Your existing function
-// ...
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById('forgotPasswordForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-  
-    var email = document.getElementById('email').value;
-  
-    // Simulate reset password functionality (replace this with actual functionality)
-    // Here you can add code to send a reset link to the provided email address
-    // For demonstration, just showing a message
-    document.getElementById('message').innerHTML = `A reset link has been sent to ${email}. Please check your email.`;
-    document.getElementById('forgotPasswordForm').reset();
-  });
+  // Set up and send the request to the login.php file
+  xhr.open("POST", "loginprocess.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send("Uname=" + encodeURIComponent(username) + "&Pass=" + encodeURIComponent(password));
+});
