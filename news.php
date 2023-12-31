@@ -11,7 +11,7 @@ $allnews = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login </title>
+    <title> Latest News</title>
     <!-- CSS Style -->
     <link rel="stylesheet" href="./assets/css/style1.css" />
 </head>
@@ -26,11 +26,11 @@ $allnews = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     <header>
         <center>
-            <h1><b> WELCOME TO RAILWAY TRANSPORTATION NEWS ANNOUNCEMENT SYSTEM </b></h1><br>
+            <h1><b>Latest News</b></h1><br>
         </center>
-    </header><br><br>
+    </header>
     <center>
-        <h2>Latest News</h2>
+
     </center>
     <br><br>
     <div class="news-container">

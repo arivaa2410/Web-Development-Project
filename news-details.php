@@ -19,7 +19,7 @@ $news = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login </title>
+    <title> <?= $news['Title']; ?> </title>
     <!-- CSS Style -->
     <link rel="stylesheet" href="./assets/css/style1.css" />
 </head>
@@ -34,9 +34,9 @@ $news = mysqli_fetch_assoc($result);
 
     <header>
         <center>
-            <h1><b> WELCOME TO RAILWAY TRANSPORTATION NEWS ANNOUNCEMENT SYSTEM </b></h1><br>
+            <h1><b>News</b></h1><br>
         </center>
-    </header><br><br>
+    </header>
 
     <div class="news-container">
         <div class="news-card-details">
