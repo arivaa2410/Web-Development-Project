@@ -21,7 +21,6 @@
        </center>
        </header><br><br>
 
-       
         <center>
           <h2><b>LOGIN PAGE</b></h2>
         </center>
@@ -29,23 +28,23 @@
 
         <center>
         <div class="login">
-            <img src="profile.png" height ="150px" width="150px"><br><br><br>
+            <img src="assets/img/profile.png" height ="150px" width="150px"><br><br><br>
 
-            <form id="login" method="get" action="login.php">
+            <form id="login" method="post" action="loginprocess.php">
                 <label><b>Username</b>
                 </label>
-                <input type="text" name="Uname" id="Uname" placeholder="Username">
+                <input type="text" name="Uname" id="Uname" placeholder="username">
                 <br><br>
                 <label><b>Password</b>
                 </label>
-                <input type="Password" name="Pass" id="Pass" placeholder="Password">
+                <input type="Password" name="Pass" id="Pass" placeholder="password">
                 <br><br>
                 <input type="submit" class="button" name="log" id="log" value="LOGIN">
                 <br><br>
                 <input type="checkbox" id="check">
                 <span>Remember me</span>
                 <br><br>
-                <a href="forgotpassword.php">Forgot Password</a>
+                <a href="OTPfunc.php">Forgot Password</a>
             </form>
         </div></center><br><br><br><br><br><br><br>
         </body>
