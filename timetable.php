@@ -123,7 +123,7 @@
         <a href="news.php">News</a>
         <a href="library.php">Library</a>
         <a href="timetable.php">Train Timetable</a>
-        <a href="profile.php">User Profile</a>
+        <a href="PageProfile.php">User Profile</a>
         <a href="logout.php">Logout</a>
     </nav>
 
